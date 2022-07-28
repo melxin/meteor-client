@@ -1,7 +1,6 @@
 package meteor.rs
 
 import eventbus.Events
-import eventbus.events.AppletLoaded
 import meteor.Main
 import net.runelite.api.Client
 import java.applet.Applet
@@ -41,7 +40,6 @@ class Applet : AppletStub, AppletContext {
         applet = configureApplet()
         applet.size = applet.minimumSize
         EventBus.post(Events.APPLET_LOADED, AppletLoaded())
-
     }
 
     private fun configureApplet(): Applet {

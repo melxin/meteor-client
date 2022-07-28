@@ -56,7 +56,7 @@ object Main : ApplicationScope, KoinComponent, EventSubscriber() {
 
     val eventBus = EventBus
     lateinit var client: Client
-    lateinit var callbacks: Callbacks
+    //lateinit var callbacks: Callbacks
     val httpClient = OkHttpClient()
     val xpClient = XpClient(httpClient)
     val overlayManager = OverlayManager
@@ -66,12 +66,10 @@ object Main : ApplicationScope, KoinComponent, EventSubscriber() {
     val tooltipManager = TooltipManager
     val executor = ExecutorServiceExceptionLogger(Executors.newSingleThreadScheduledExecutor())
     val worldService = WorldService
-    lateinit var xpTrackerService: XpTrackerService
 
     var logger = Logger("meteor.Main")
 
     var placement: WindowPlacement = WindowPlacement.Maximized
-    var interactionManager: InteractionManager? = null
     var chatMessageManager: ChatMessageManager? = null
     var chatCommandManager: ChatCommandManager? = null
     var gameEventManager: GameEventManager? = null
@@ -85,7 +83,7 @@ object Main : ApplicationScope, KoinComponent, EventSubscriber() {
         timer.start()
         processArguments(args)
         startKoin { modules(Module.CLIENT_MODULE) }
-        callbacks = get()
+        //callbacks = get()
         MeteorliteTheme.install()
         AppletConfiguration.init()
         Applet().init()
@@ -159,18 +157,16 @@ object Main : ApplicationScope, KoinComponent, EventSubscriber() {
 
     fun finishStartup() {
         client = Applet.asClient(Applet.applet)
-        client.callbacks = callbacks
+        //client.callbacks = callbacks
 
         WidgetInspector
         MenuManager
-        interactionManager = InteractionManager()
-        interactionManager!!.subscribe()
         initOverlays()
         chatMessageManager = ChatMessageManager()
         chatCommandManager = ChatCommandManager()
         gameEventManager = GameEventManager
         PluginManager.loadExternalPlugins()
-        xpTrackerService = XpTrackerService(PluginManager.get())
+        //xpTrackerService = XpTrackerService(PluginManager.get())
         timer.stop()
         logger.info("Meteor started in ${timer.getTime(TimeUnit.MILLISECONDS)}ms")
     }
