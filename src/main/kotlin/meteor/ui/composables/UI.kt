@@ -10,7 +10,6 @@ import compose.icons.Octicons
 import compose.icons.octicons.Plug24
 import meteor.Main
 import meteor.plugins.Plugin
-import meteor.plugins.notes.NotesPlugin
 import meteor.rs.Applet
 import meteor.ui.composables.dev.WindowFrame
 import meteor.ui.composables.toolbar.ToolbarButton
@@ -28,15 +27,14 @@ val uiColor
 
 @Composable
 fun FrameWindowScope.Window() {
-
+    Main.frame = this
     MaterialTheme {
-        WindowFrame {
+        WindowFrame() {
             when {
                 pluginsOpen.value ||
-                        configOpen.value ||
-                        notePanel.value -> window.minimumSize = Dimension(Applet().clientWidth, 542)
+                        configOpen.value -> window.minimumSize = Dimension(Applet().clientWidth, 503)
                 else -> window.minimumSize =
-                    Dimension(Applet().minimalWidth, 542)
+                    Dimension(806, 530)
             }
 
             toolBar {
@@ -47,7 +45,6 @@ fun FrameWindowScope.Window() {
                     pluginPanelIsOpen.value -> pluginPanel.value?.CreateComponent()
                     configOpen.value -> ConfigPanel()
                     pluginsOpen.value -> PluginsPanel()
-                    notePanel.value -> NotesPlugin().notesTextNode()
                 }
                 gameFrame {
                     OSRSPanel()

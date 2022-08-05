@@ -26,7 +26,7 @@ package meteor.ui.components
 
 import com.google.common.base.MoreObjects
 import com.google.common.base.Strings
-import net.runelite.api.util.Text
+import meteor.util.Text
 import java.awt.*
 
 class LineComponent : LayoutableRenderableEntity {

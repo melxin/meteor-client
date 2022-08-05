@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, arlyon <arlyon@me.com>
+ * Copyright (c) 2019, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,32 +22,18 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package meteor.util
+package meteor.util;
 
-import java.util.*
+import com.google.common.base.CharMatcher;
 
-/**
- * An enum and util function to determine the OS.
- */
-enum class OSType {
-    Windows, MacOS, Linux, Other;
-
-    companion object {
-        var oSType: OSType? = null
-
-        init {
-            val OS = System
-                .getProperty("os.name", "generic")
-                .lowercase(Locale.getDefault())
-            oSType = if (OS.contains("mac") || OS.contains("darwin")) {
-                MacOS
-            } else if (OS.contains("win")) {
-                Windows
-            } else if (OS.contains("nux")) {
-                Linux
-            } else {
-                Other
-            }
-        }
-    }
+class JagexPrintableCharMatcher extends CharMatcher
+{
+	@Override
+	public boolean matches(char c)
+	{
+		// Characters which are printable
+		return (c >= 32 && c <= 126)
+			|| c == 128
+			|| (c >= 160 && c <= 255);
+	}
 }

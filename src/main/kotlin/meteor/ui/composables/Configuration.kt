@@ -26,14 +26,15 @@ import com.godaddy.android.colorpicker.harmony.HarmonyColorPicker
 import compose.icons.Octicons
 import compose.icons.octicons.ChevronLeft24
 import eventbus.Events
-import eventbus.events.ConfigButtonClicked
 import meteor.Main
 import meteor.config.ConfigManager
+
 import meteor.config.descriptor.ConfigDescriptor
 import meteor.config.descriptor.ConfigItemDescriptor
 import meteor.config.legacy.ModifierlessKeybind
 import meteor.plugins.PluginDescriptor
 import meteor.util.ColorUtil
+
 import java.awt.Button
 import java.awt.event.KeyEvent
 import java.util.stream.Collectors
@@ -655,10 +656,10 @@ fun createButtonNode(descriptor: ConfigDescriptor, configItemDescriptor: ConfigI
             MaterialTheme(colors = darkThemeColors) {
                 OutlinedButton(onClick = {
                     //TODO fix enum
-                    Main.client.callbacks.post(
+/*                    Main.client.callbacks.post(
                         Events.CONFIG_CHANGED,
                         ConfigButtonClicked(descriptor.group.value, configItemDescriptor.key())
-                    )
+                    )*/
                 }
                 ) {
                     Text(configItemDescriptor.name())

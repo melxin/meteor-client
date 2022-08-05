@@ -39,15 +39,14 @@ class Applet : AppletStub, AppletContext {
     fun init() {
         applet = configureApplet()
         applet.size = applet.minimumSize
-        EventBus.post(Events.APPLET_LOADED, AppletLoaded())
     }
 
     private fun configureApplet(): Applet {
-        val applet = ClassLoader.getSystemClassLoader().loadClass("client").newInstance() as Applet
-        applet.setStub(this)
+        val applet = ClassLoader.getSystemClassLoader().loadClass("Client").newInstance() as Applet
+/*        applet.setStub(this)
         applet.maximumSize = appletMaxSize()
         applet.minimumSize = appletMinSize()
-        applet.preferredSize = applet.minimumSize
+        applet.preferredSize = applet.minimumSize*/
         return applet
     }
 

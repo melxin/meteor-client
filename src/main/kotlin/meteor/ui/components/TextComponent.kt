@@ -25,7 +25,7 @@
 package meteor.ui.components
 
 import meteor.util.ColorUtil.colorWithAlpha
-import net.runelite.api.util.Text
+import meteor.util.Text
 import java.awt.*
 import java.util.regex.Pattern
 

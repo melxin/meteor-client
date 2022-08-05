@@ -5,7 +5,7 @@ import meteor.config.ConfigManager
 import meteor.config.ConfigManager.getConfig
 import meteor.config.ConfigManager.setDefaultConfiguration
 import meteor.ui.composables.pluginsOpen
-import meteor.ui.overlay.Overlay
+
 import net.runelite.client.config.Config
 
 open class Plugin : EventSubscriber() {
@@ -13,8 +13,7 @@ open class Plugin : EventSubscriber() {
     var javaConfig: Config? = null
 
     var client = Main.client
-    val overlayManager = Main.overlayManager
-    val overlays = ArrayList<Overlay>()
+    //val overlays = ArrayList<Overlay>()
     var running = false
 
     fun getDescriptor(): PluginDescriptor {
@@ -38,24 +37,24 @@ open class Plugin : EventSubscriber() {
         return config
     }
 
-    inline fun <reified T : Overlay> overlay(overlay: T): T {
+/*    inline fun <reified T : Overlay> overlay(overlay: T): T {
         overlays.add(overlay)
         return overlay
-    }
+    }*/
 
     fun start() {
         subscribe()
         eventListening = true
-        for (overlay in overlays)
-            overlayManager.add(overlay)
+/*        for (overlay in overlays)
+            overlayManager.add(overlay)*/
         running = true
     }
 
     fun stop() {
         unsubscribe()
         eventListening = false
-        for (overlay in overlays)
-            overlayManager.remove(overlay)
+/*        for (overlay in overlays)
+            overlayManager.remove(overlay)*/
         running = false
     }
 

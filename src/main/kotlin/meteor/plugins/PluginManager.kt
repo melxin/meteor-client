@@ -4,6 +4,7 @@ import androidx.compose.runtime.mutableStateListOf
 import meteor.Configuration
 import meteor.Main
 import meteor.config.ConfigManager
+import meteor.plugins.stretchedmode.StretchedModePlugin
 import org.apache.commons.lang3.time.StopWatch
 import java.io.File
 import java.net.JarURLConnection
@@ -20,7 +21,7 @@ object PluginManager {
     val runningMap = HashMap<Plugin, Boolean>()
 
     init {
-        init<ExamplePlugin>()
+        init<StretchedModePlugin>()
     }
 
     private fun loadExternal(jar: File) {

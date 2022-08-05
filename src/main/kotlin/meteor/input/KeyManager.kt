@@ -26,7 +26,6 @@ package meteor.input
 
 import meteor.Logger
 import meteor.Main.client
-import net.runelite.api.GameState
 import java.awt.event.KeyEvent
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -93,9 +92,6 @@ object KeyManager {
     }
 
     private fun shouldProcess(keyListener: KeyListener): Boolean {
-        val gameState = client.gameState
-        return if (gameState == GameState.LOGIN_SCREEN || gameState == GameState.LOGIN_SCREEN_AUTHENTICATOR) {
-            keyListener.isEnabledOnLoginScreen
-        } else true
+        return true
     }
 }

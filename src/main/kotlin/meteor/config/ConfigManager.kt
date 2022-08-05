@@ -8,14 +8,12 @@ import com.google.common.collect.ComparisonChain
 import eventbus.Events
 import meteor.Configuration.CONFIG_FILE
 import meteor.config.legacy.*
-import eventbus.events.ConfigChanged
 import meteor.Configuration.METEOR_DIR
 import meteor.config.descriptor.ConfigDescriptor
 import meteor.config.descriptor.ConfigItemDescriptor
 import meteor.config.descriptor.ConfigSectionDescriptor
 import meteor.config.descriptor.ConfigTitleDescriptor
 import meteor.plugins.Plugin
-import net.runelite.api.coords.WorldPoint
 import net.runelite.client.config.*
 import org.rationalityfrontline.kevent.KEVENT as EventBus
 import java.awt.Color
@@ -42,6 +40,7 @@ object ConfigManager {
     private const val KEY_SPLITTER_GROUP = 0
     private const val KEY_SPLITTER_KEY = 1
     var loaded = false
+/*
 
     fun setPlayerConfiguration(attribute: String, value: Any) {
         Main.client.localPlayer?.let {
@@ -70,6 +69,7 @@ object ConfigManager {
         }
         return null
     }
+*/
 
     fun stringToObject(str: String, type: Class<*>): Any? {
         if (type == Boolean::class.javaPrimitiveType || type == Boolean::class.java) {
@@ -122,13 +122,13 @@ object ConfigManager {
                 ModifierlessKeybind(code, mods)
             } else Keybind(code, mods)
         }
-        if (type == WorldPoint::class.java) {
+/*        if (type == WorldPoint::class.java) {
             val splitStr = str.split(":").toTypedArray()
             val x = splitStr[0].toInt()
             val y = splitStr[1].toInt()
             val plane = splitStr[2].toInt()
             return WorldPoint(x, y, plane)
-        }
+        }*/
         if (type == Duration::class.java) {
             return Duration.ofMillis(str.toLong())
         }
@@ -160,9 +160,9 @@ object ConfigManager {
         if (`object` is Keybind) {
             return `object`.keyCode.toString() + ":" + `object`.modifiers
         }
-        if (`object` is WorldPoint) {
+/*        if (`object` is WorldPoint) {
             return `object`.x.toString() + ":" + `object`.y + ":" + `object`.plane
-        }
+        }*/
         if (`object` is Duration) {
             return `object`.toMillis().toString()
         }
@@ -296,11 +296,11 @@ object ConfigManager {
 
         //log.debug("Unsetting configuration value for {}", wholeKey);
         handler.invalidate()
-        val configChanged = ConfigChanged()
+/*        val configChanged = ConfigChanged()
         configChanged.group = groupName
         configChanged.key = key
         configChanged.oldValue = oldValue
-        EventBus.post(Events.CONFIG_CHANGED, configChanged)
+        EventBus.post(Events.CONFIG_CHANGED, configChanged)*/
     }
 
     private fun getAllDeclaredInterfaceFields(clazz: Class<*>): Collection<Field> {
@@ -403,12 +403,12 @@ object ConfigManager {
 
         handler.invalidate()
 
-        val configChanged = ConfigChanged()
+/*        val configChanged = ConfigChanged()
         configChanged.group = groupName
         configChanged.key = key
         configChanged.oldValue = oldValue
         configChanged.newValue = objectToString(value)
-        EventBus.post(Events.CONFIG_CHANGED, configChanged)
+        EventBus.post(Events.CONFIG_CHANGED, configChanged)*/
 
         saveProperties()
     }

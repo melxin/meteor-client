@@ -26,6 +26,9 @@
 package meteor.input
 
 import meteor.Main
+import net.runelite.rs.api.RSClient
+import java.awt.Component
+import java.awt.Frame
 import java.awt.event.MouseEvent
 
 object TranslateMouseListener : MouseListener {
@@ -59,17 +62,19 @@ object TranslateMouseListener : MouseListener {
     }
 
     private fun translateEvent(e: MouseEvent): MouseEvent {
-        if (!client.isStretchedEnabled) {
-            return e
-        }
+        client as RSClient
         val stretchedDimensions = client.stretchedDimensions
-        val realDimensions = client.realDimensions
-        val newX = (e.x / (stretchedDimensions.width / realDimensions.getWidth())).toInt()
-        val newY = (e.y / (stretchedDimensions.height / realDimensions.getHeight())).toInt()
+        val modX: Float = (stretchedDimensions.width.toFloat() / 765)
+        val newX = (e.x.toFloat() / modX);
+        val modY: Float = (stretchedDimensions.height.toFloat() / 503)
+        val newY = (e.y.toFloat() / modY);
+        println("Stretched size: x${stretchedDimensions.width} - y${stretchedDimensions.height}")
+        println("Real click: x" + e.x + " - y" + e.y)
+        println("modified: x$newX - y$newY")
         val mouseEvent = MouseEvent(
-            client.canvas, e.id, e.getWhen(),
+            client.gameWindow.`game$api`() as Component, e.id, e.getWhen(),
             e.modifiersEx,
-            newX, newY, e.clickCount, e.isPopupTrigger, e.button
+            newX.toInt(), newY.toInt(), e.clickCount, e.isPopupTrigger, e.button
         )
         if (e.isConsumed) {
             mouseEvent.consume()

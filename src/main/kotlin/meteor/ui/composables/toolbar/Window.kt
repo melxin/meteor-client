@@ -9,6 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
@@ -27,8 +28,6 @@ annotation class WindowPanel
 annotation class GamePanel
 
 class GameWindow {
-
-
     @GamePanel
     @Composable
     fun gameFrame(
@@ -40,19 +39,22 @@ class GameWindow {
                 modifier = Modifier
                     .clip(RoundedCornerShape(8.dp))
                     .background(backgroundColor)
-
             ) {
+                gameFrame = this
                 Column {
                     content.invoke()
                 }
             }
         }
     }
+
+    companion object {
+        var gameFrame: BoxWithConstraintsScope? = null
+    }
 }
 
 
 class UI {
-
     @ToolBar
     @Composable
     fun toolBar(content: @Composable () -> Unit) {
@@ -79,7 +81,7 @@ class UI {
         BoxWithConstraints(modifier = Modifier.background(darkThemeColors.background)) {
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
+                    .fillMaxSize()
             ) {
                 content.invoke(gameContent)
             }

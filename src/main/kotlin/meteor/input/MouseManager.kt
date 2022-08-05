@@ -73,6 +73,7 @@ object MouseManager {
     fun processMousePressed(mouseEvent: MouseEvent): MouseEvent {
         var mouseEvent = mouseEvent
         if (mouseEvent.isConsumed) {
+            println("consumed already")
             return mouseEvent
         }
         checkExtraMouseButtons(mouseEvent)
@@ -101,14 +102,17 @@ object MouseManager {
     }
 
     fun processMouseClicked(mouseEvent: MouseEvent): MouseEvent {
+        println("mouse click")
         var mouseEvent = mouseEvent
         if (mouseEvent.isConsumed) {
             return mouseEvent
         }
         checkExtraMouseButtons(mouseEvent)
         for (mouseListener in mouseListeners) {
+            println("processed click")
             mouseEvent = mouseListener.mouseClicked(mouseEvent)
             if (mouseEvent.isConsumed) {
+                println("isConsumed")
                 break
             }
         }
