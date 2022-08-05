@@ -100,7 +100,7 @@ object Main : ApplicationScope, KoinComponent, EventSubscriber() {
         GameCanvas.addKeyListener((client as RSClient).gameWindow.`game$api`())
         GameCanvas.addFocusListener((client as RSClient).gameWindow.`game$api`())
         //initOverlays()
-        //PluginManager.loadExternalPlugins()
+        PluginManager.loadExternalPlugins()
         timer.stop()
         logger.info("Meteor started in ${timer.getTime(TimeUnit.MILLISECONDS)}ms")
     }

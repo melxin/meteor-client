@@ -68,9 +68,6 @@ object TranslateMouseListener : MouseListener {
         val newX = (e.x.toFloat() / modX);
         val modY: Float = (stretchedDimensions.height.toFloat() / 503)
         val newY = (e.y.toFloat() / modY);
-        println("Stretched size: x${stretchedDimensions.width} - y${stretchedDimensions.height}")
-        println("Real click: x" + e.x + " - y" + e.y)
-        println("modified: x$newX - y$newY")
         val mouseEvent = MouseEvent(
             client.gameWindow.`game$api`() as Component, e.id, e.getWhen(),
             e.modifiersEx,

@@ -22,7 +22,7 @@ configurations.all {
 
 repositories {
     maven {url = uri("https://androidx.dev/storage/compose-compiler/repository")}
-    maven { url = uri("https://raw.githubusercontent.com/open-osrs/hosting/master/") }
+    //maven { url = uri("https://raw.githubusercontent.com/open-osrs/hosting/master/") }
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev/")}
     google()
     mavenLocal()
@@ -41,7 +41,7 @@ dependencies {
     implementation(group = "meteor", name = "annotations", version = apiRelease)
     implementation(group = "meteor", name = "logger", version = apiRelease)
     runtimeOnly(group = "meteor", name = "injected", version = apiRelease)
-    runtimeOnly(group = "meteor", name = "scripts", version = apiRelease)
+    //runtimeOnly(group = "meteor", name = "scripts", version = apiRelease)
 
     //Deob
     runtimeOnly("org.bouncycastle:bcprov-jdk15on:1.70")
@@ -148,6 +148,13 @@ tasks {
 tasks.compileJava {
     sourceCompatibility = JavaVersion.VERSION_17.toString()
     targetCompatibility = JavaVersion.VERSION_17.toString()
+}
+
+tasks {
+    java {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
