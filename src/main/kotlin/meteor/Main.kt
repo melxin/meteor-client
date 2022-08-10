@@ -9,7 +9,6 @@ import meteor.game.FontManager
 import meteor.plugins.EventSubscriber
 import meteor.plugins.PluginManager
 import meteor.rs.Applet
-import meteor.rs.AppletConfiguration
 import meteor.ui.composables.Window
 import meteor.ui.composables.dev.UI
 
@@ -19,6 +18,7 @@ import net.runelite.api.Callbacks
 import net.runelite.api.Client
 import net.runelite.http.api.xp.XpClient
 import net.runelite.rs.api.RSClient
+import net.runelite.rs.api.RSGame
 import okhttp3.OkHttpClient
 import org.apache.commons.lang3.time.StopWatch
 import org.koin.core.component.KoinComponent
@@ -68,7 +68,7 @@ object Main : ApplicationScope, KoinComponent, EventSubscriber() {
         startKoin { modules(Module.CLIENT_MODULE) }
         callbacks = get()
         //MeteorliteTheme.install()
-        AppletConfiguration.init()
+        //AppletConfiguration.init()
         Applet().init()
         Window(
             onCloseRequest = this::exitApplication,
@@ -95,10 +95,12 @@ object Main : ApplicationScope, KoinComponent, EventSubscriber() {
     fun finishStartup() {
         client = Applet.asClient(Applet.applet)
         client.callbacks = callbacks
-        GameCanvas.addMouseListener((client as RSClient).gameWindow.`game$api`())
-        GameCanvas.addMouseMotionListener((client as RSClient).gameWindow.`game$api`())
-        GameCanvas.addKeyListener((client as RSClient).gameWindow.`game$api`())
-        GameCanvas.addFocusListener((client as RSClient).gameWindow.`game$api`())
+        val client = client as RSGame
+        GameCanvas.addMouseListener(client)
+        GameCanvas.addMouseMotionListener(client)
+        GameCanvas.addKeyListener(client)
+        GameCanvas.addFocusListener(client)
+        GameCanvas.addMouseWheelListener(client)
         //initOverlays()
         PluginManager.loadExternalPlugins()
         timer.stop()

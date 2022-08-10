@@ -32,7 +32,7 @@ fun FrameWindowScope.Window() {
         WindowFrame() {
             when {
                 pluginsOpen.value ||
-                        configOpen.value -> window.minimumSize = Dimension(Applet().clientWidth, 503)
+                        configOpen.value -> window.minimumSize = Dimension(806, 503)
                 else -> window.minimumSize =
                     Dimension(806, 530)
             }

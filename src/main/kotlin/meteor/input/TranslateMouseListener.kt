@@ -25,6 +25,7 @@
  */
 package meteor.input
 
+import meteor.GameCanvas
 import meteor.Main
 import net.runelite.rs.api.RSClient
 import java.awt.Component
@@ -38,6 +39,7 @@ object TranslateMouseListener : MouseListener {
     }
 
     override fun mousePressed(mouseEvent: MouseEvent): MouseEvent {
+        System.out.println("mouse translated")
         return translateEvent(mouseEvent)
     }
 
@@ -63,13 +65,13 @@ object TranslateMouseListener : MouseListener {
 
     private fun translateEvent(e: MouseEvent): MouseEvent {
         client as RSClient
-        val stretchedDimensions = client.stretchedDimensions
+        val stretchedDimensions = GameCanvas.size
         val modX: Float = (stretchedDimensions.width.toFloat() / 765)
         val newX = (e.x.toFloat() / modX);
         val modY: Float = (stretchedDimensions.height.toFloat() / 503)
         val newY = (e.y.toFloat() / modY);
         val mouseEvent = MouseEvent(
-            client.gameWindow.`game$api`() as Component, e.id, e.getWhen(),
+            client as Component, e.id, e.getWhen(),
             e.modifiersEx,
             newX.toInt(), newY.toInt(), e.clickCount, e.isPopupTrigger, e.button
         )

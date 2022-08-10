@@ -111,6 +111,7 @@ class Hooks : Callbacks {
     }
 
     override fun mousePressed(mouseEvent: MouseEvent): MouseEvent {
+        System.out.println("mouse processed")
         return MouseManager.processMousePressed(mouseEvent)
     }
 
